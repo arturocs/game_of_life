@@ -30,14 +30,16 @@ impl Game {
     }
 
     fn neighbors(&self, i: usize, j: usize) -> u8 {
-        self.board[i][(j + 1).clamp(0, BOARD_SIZE.y - 1)]
-            + self.board[(i + 1).clamp(0, BOARD_SIZE.x - 1)][(j + 1).clamp(0, BOARD_SIZE.y - 1)]
-            + self.board[(i + 1).clamp(0, BOARD_SIZE.x - 1)][j]
-            + self.board[(i + 1).clamp(0, BOARD_SIZE.x - 1)][(j.saturating_sub(1))]
-            + self.board[i][(j.saturating_sub(1))]
-            + self.board[(i.saturating_sub(1))][j]
-            + self.board[(i.saturating_sub(1))][(j.saturating_sub(1))]
-            + self.board[(i.saturating_sub(1))][(j + 1).clamp(0, BOARD_SIZE.y - 1)]
+        let dec_and_rem = |x, size| ((x as isize - 1).rem_euclid(size as isize)) as usize;
+        let inc_and_rem = |x: usize, size| (x + 1).rem_euclid(size);
+        self.board[i][inc_and_rem(j, BOARD_SIZE.y)]
+            + self.board[inc_and_rem(i, BOARD_SIZE.x)][inc_and_rem(j, BOARD_SIZE.y)]
+            + self.board[inc_and_rem(i, BOARD_SIZE.x)][j]
+            + self.board[inc_and_rem(i, BOARD_SIZE.x)][dec_and_rem(j, BOARD_SIZE.y)]
+            + self.board[i][dec_and_rem(j, BOARD_SIZE.y)]
+            + self.board[dec_and_rem(i, BOARD_SIZE.x)][j]
+            + self.board[dec_and_rem(i, BOARD_SIZE.x)][dec_and_rem(j, BOARD_SIZE.y)]
+            + self.board[dec_and_rem(i, BOARD_SIZE.x)][inc_and_rem(j, BOARD_SIZE.y)]
     }
 
     fn next_generation(&mut self) {
