@@ -1027,9 +1027,9 @@ dependencies = [
 
 [[package]]
 name = "speedy2d"
-version = "1.0.3"
+version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9154084c1ad12127510cbdd03a6074c09fb45a8e5dddf87d357322f61a1ad64a"
+checksum = "e20c9cc29dcbfb1a94bf9d7e1c72aa0fbfefac8a0b76946d46fdf799ad424f7a"
 dependencies = [
  "backtrace",
  "gl",

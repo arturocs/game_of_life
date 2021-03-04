@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 rand = "0.8.3"
-speedy2d = "1.0.3"
+speedy2d = "1.0.6"
 
 [profile.release]
 lto = true
